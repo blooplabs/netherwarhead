@@ -1,8 +1,7 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
+.nether-icon {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  margin-top: -2px;
+  border-radius: .2em;
 }
