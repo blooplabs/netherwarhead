@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/pull', function (req, res, next) {
   reddit.all(function (body) {
-    res.send(body);
+    res.json(body);
   });
 });
 
