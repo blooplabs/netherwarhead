@@ -1,5 +1,5 @@
 angular.module("netherWarhead", ["netherWarhead.services"])
-  .controller("dataController", function($scope, $http, dataAnalyzer){
+  .controller("dataController", function($scope, $http, dataAnalyzer) {
     $scope.dataPull = function() {
       $http({
         method: "GET",
