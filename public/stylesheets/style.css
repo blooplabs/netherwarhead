@@ -1,7 +1,36 @@
+/* Nether Warhead Styles */
+
 .nether-icon {
   background-color: #5cb85c;
   color: white;
   border: none;
   margin-top: -2px;
   border-radius: .2em;
+}
+
+
+/* D3 Chart Styles */
+
+.chart {
+  background: #EEEEEE;
+  padding: 3px;
+}
+
+.bar {
+  fill: #5cb85c;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
 }

@@ -22,5 +22,15 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
 
       });
     };
+
+    $scope.myData = [
+      {name: "Locke",    value:  4},
+      {name: "Reyes",    value:  8},
+      {name: "Ford",     value: 15},
+      {name: "Jarrah",   value: 16},
+      {name: "Shephard", value: 23},
+      {name: "Kwon",     value: 42}
+    ];
+
   }]
 );
