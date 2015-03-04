@@ -13,24 +13,17 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
 
       }).success(function(data) {
         // Sends data to the data analyzer service for formatting
-        dataAnalyzer.extractData($scope, data);
+        dataAnalyzer.extractComments($scope, data);
+        dataAnalyzer.extractSubreddit($scope, data);
 
       }).error(function(data) {
         // Number of comments set to 0
         $scope.num_comments = null;
         console.log(data);
-
       });
     };
 
-    $scope.myData = [
-      {name: "Locke",    value:  4},
-      {name: "Reyes",    value:  8},
-      {name: "Ford",     value: 15},
-      {name: "Jarrah",   value: 16},
-      {name: "Shephard", value: 23},
-      {name: "Kwon",     value: 42}
-    ];
+    $scope.dataPull();
 
   }]
 );
