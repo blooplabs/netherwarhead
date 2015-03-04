@@ -12,7 +12,7 @@ directives.directive("barChart", function() {
         http://odiseo.net/angularjs/proper-use-of-d3-js-with-angular-directives
       */
 
-      // Set margins around chart
+      // Set margins and size of chart
       var margin = {top: 20, right: 30, bottom: 30, left: 40},
           width = 480 - margin.left - margin.right,
           height = 250 - margin.top - margin.bottom;
