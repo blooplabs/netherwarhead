@@ -63,15 +63,12 @@
   <!-- AngularJS Content -->
   <div ng-app="netherWarhead">
     <div class="container">
-
       <div ng-controller="pageController">
-        {{ template.url }}
-        <select ng-model="template"
+        <select ng-model="template" style="color:black;"
           ng-options="t as t.name for t in templates">
         </select>
         <div ng-include="template.url"></div>
       </div>
-
     </div>
   </div>
 
