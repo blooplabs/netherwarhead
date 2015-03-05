@@ -23,6 +23,7 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
       });
     };
 
+    // Pull data from server
     $scope.dataPull();
   }]
 );

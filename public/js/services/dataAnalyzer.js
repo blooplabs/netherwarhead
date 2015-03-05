@@ -9,39 +9,55 @@ services.factory("dataAnalyzer", function() {
     scope.num_comments = totalComments;
   };
 
+  /* For use with the sort() method, sorts by descending
+   * value and then alphabetically, disregarding capitalization
+   */
+  var sortDescending = function(a, b) {
+    // Compare values for sorting
+    var compare = b.value - a.value;
+
+    // If values are equal, sort alphabetically by subreddit name
+    if (compare === 0) {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        compare = -1;
+      } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        compare = 1;
+      } else {
+        compare = 0;
+      }
+    }
+
+    return compare;
+  };
+
   // Extract data by subreddit
   var sortBySubreddit = function(scope, data) {
     console.log(data.stats);
 
-    // Create sorable array of objects: {subreddit, count}
-    var subArray = [];
+    // Create sorable arrays of objects: {subreddit, value}
+    var postsArray = [];
+    var scoreArray = [];
     for (var sub in data.stats.subreddit) {
-      subArray.push({
+      // Posts by subreddit
+      postsArray.push({
         name: sub,
         value: data.stats.subreddit[sub].count
       });
+      // Score by subreddit
+      scoreArray.push({
+        name: sub,
+        value: data.stats.subreddit[sub].score
+      });
     }
 
-    subArray.sort(function(a, b) {
-      // Compare values for sorting
-      var compare = b.value - a.value;
+    postsArray.sort(sortDescending);
+    scoreArray.sort(sortDescending);
 
-      // If values are equal, sort alphabetically by subreddit name
-      if (compare === 0) {
-        if (a.name.toLowerCase() < b.name.toLowerCase()) {
-          compare = -1;
-        } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
-          compare = 1;
-        } else {
-          compare = 0;
-        }
-      }
+    scope.postsBySub = postsArray;
+    scope.scoreBySub = scoreArray;
 
-      return compare;
-    });
-
-    scope.myData = subArray;
-
+    console.log(scope.postsBySub);
+    console.log(scope.scoreBySub);
   };
 
   return {

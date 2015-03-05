@@ -15,12 +15,27 @@ directives.directive("barChart", function() {
       // Show loading indicator
       showLoading();
 
+      // Define chart information
+      var chartInfo = {
+        postsBySub: {
+          label: "# of posts",
+          format: "d"
+        },
+        scoreBySub: {
+          label: "score",
+          format: "s"
+        }
+      };
+
       // Define data to plot
       var plotData = scope.data;
 
+      // Define chart var
+      var chart;
+
       // Set margins and size of chart
-      var margin = {top: 20, right: 20, bottom: 130, left: 60},
-          width = 500 - margin.left - margin.right,
+      var margin = {top: 20, right: 20, bottom: 130, left: 70},
+          width = 510 - margin.left - margin.right,
           height = 300 - margin.top - margin.bottom;
 
       // Define scales for axes
@@ -37,10 +52,10 @@ directives.directive("barChart", function() {
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient("left")
-          .tickFormat(d3.format("d"));
+          .tickFormat(d3.format(chartInfo[attrs.chartData].format));
 
-      // Define tag where chart is placed (this draws a white box)
-      var chart;
+      // Define y-axis label to use, dependent on chartData value
+      var yLabel = chartInfo[attrs.chartData].label;
 
       /*
        * Watch for chart data changes
@@ -118,14 +133,14 @@ directives.directive("barChart", function() {
         // Draw and style y axis and number of ticks
         chart.append("g")
             .attr("class", "y axis")
-            .call(yAxis.tickValues(d3.range(y_max+1)))
+            .call(yAxis)
           .append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", -45)
+            .attr("y", -55)
             .attr("x", -44)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("# of posts");
+            .text(yLabel);
 
         // Draw and style bars
         chart.selectAll(".bar")
