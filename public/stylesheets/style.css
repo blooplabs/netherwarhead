@@ -11,22 +11,22 @@
 /* D3 Chart Styles */
 
 .chart {
-  background: #EEEEEE;
+  background: #4E5D6C;
   padding: 3px;
 }
 
 .bar {
-  fill: #5cb85c;
+  fill: #DF691A;
 }
 
 .axis text {
-  font: 10px sans-serif;
+  fill: #fff;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #fff;
   shape-rendering: crispEdges;
 }
 

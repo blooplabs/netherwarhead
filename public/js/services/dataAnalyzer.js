@@ -4,16 +4,7 @@
 services.factory("dataAnalyzer", function() {
   // Extract total number of comments in all posts
   var extractComments = function(scope, data) {
-    console.log(data);
-
-    // Add up the number of comments for each reddit post
-    var totalComments = 0;
-    for (i = 0; i < data.data.children.length; i++) {
-      totalComments += data.data.children[i].data.num_comments;
-      console.log(i + ":" + data.data.children[i].data.num_comments);
-    }
-
-    // Save total in a scope variable
+    var totalComments = data.stats.num_comments;
     console.log("Total comments: " + totalComments);
     scope.num_comments = totalComments;
   };
@@ -33,13 +24,13 @@ services.factory("dataAnalyzer", function() {
 
     subArray.sort(function(a, b) {
       // Compare values for sorting
-      var compare = a.value - b.value;
+      var compare = b.value - a.value;
 
       // If values are equal, sort alphabetically by subreddit name
       if (compare === 0) {
-        if (a.name < b.name) {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
           compare = -1;
-        } else if (a.name > b.name) {
+        } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
           compare = 1;
         } else {
           compare = 0;

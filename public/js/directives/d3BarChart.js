@@ -19,9 +19,9 @@ directives.directive("barChart", function() {
       var plotData = scope.data;
 
       // Set margins and size of chart
-      var margin = {top: 20, right: 30, bottom: 100, left: 40},
-          width = 480 - margin.left - margin.right,
-          height = 250 - margin.top - margin.bottom;
+      var margin = {top: 20, right: 20, bottom: 130, left: 60},
+          width = 500 - margin.left - margin.right,
+          height = 300 - margin.top - margin.bottom;
 
       // Define scales for axes
       var x = d3.scale.ordinal()
@@ -36,7 +36,8 @@ directives.directive("barChart", function() {
 
       var yAxis = d3.svg.axis()
           .scale(y)
-          .orient("left");
+          .orient("left")
+          .tickFormat(d3.format("d"));
 
       // Define tag where chart is placed (this draws a white box)
       var chart;
@@ -73,14 +74,14 @@ directives.directive("barChart", function() {
        * Shows chart loading spinner
        */
       function showLoading() {
-        element.append("<i class=\"fa fa-2x fa-spinner fa-spin load-icon\"></i>");
+        element.append("<i class=\"fa fa-2x fa-spinner fa-spin chart-load-icon\"></i>");
       }
 
       /*
        * Hides chart loading spinner
        */
       function hideLoading() {
-          $("i").remove();
+          $("i.chart-load-icon").remove();
       }
 
       /*
@@ -103,6 +104,7 @@ directives.directive("barChart", function() {
         // Define domains
         x.domain(plotData.map(function(d) { return d.name; }));
         y.domain([0, d3.max(plotData, function(d) { return d.value; })]);
+        var y_max = y.domain().slice(-1)[0];
 
         // Draw and style x axis
         chart.append("g")
@@ -110,19 +112,20 @@ directives.directive("barChart", function() {
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
           .selectAll("text")
-            .attr("transform", "translate(-11, 5) rotate(-65)")
+            .attr("transform", "translate(-12, 5) rotate(-65)")
             .style("text-anchor", "end");
 
-        // Draw and style y axis
+        // Draw and style y axis and number of ticks
         chart.append("g")
             .attr("class", "y axis")
-            .call(yAxis)
+            .call(yAxis.tickValues(d3.range(y_max+1)))
           .append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 6)
+            .attr("y", -45)
+            .attr("x", -44)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Frequency");
+            .text("# of posts");
 
         // Draw and style bars
         chart.selectAll(".bar")
