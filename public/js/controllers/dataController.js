@@ -24,6 +24,5 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
     };
 
     $scope.dataPull();
-
   }]
 );

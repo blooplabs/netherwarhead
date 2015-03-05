@@ -3,10 +3,15 @@
 
 controllers.controller("pageController", ["$scope",
   function pageController($scope) {
-    $scope.templates = [
-      { name: "chartsView.html", url: "chartsView.html"},
-      { name: "aboutView.html", url: "aboutView.html"}
-    ];
-    $scope.template = $scope.templates[0];
+    $scope.templates = {
+      "chartsView": "chartsView.html",
+      "aboutView": "aboutView.html"
+    };
+
+    $scope.template = $scope.templates.chartsView;
+
+    $scope.isActive = function (templateUrl) {
+        return templateUrl === $scope.template;
+    };
   }]
 );

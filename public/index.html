@@ -35,39 +35,42 @@
 </head>
 
 <body>
-  <!-- Nav bar -->
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <i class="fa fa-rocket fa-border pull-left nether-icon"></i>
-          Nether<span style='color:#5cb85c'>Warhead</span>
-        </a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a>
-          </li>
-          <li><a href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-->
-  </nav>
-
   <!-- AngularJS Content -->
   <div ng-app="netherWarhead">
-    <div class="container">
-      <div ng-controller="pageController">
-        <select ng-model="template" style="color:black;"
-          ng-options="t as t.name for t in templates">
-        </select>
-        <div ng-include="template.url"></div>
+
+    <!-- Nav bar -->
+    <div ng-controller="pageController">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              <i class="fa fa-rocket fa-border pull-left nether-icon"></i>
+              Nether<span style='color:#5cb85c'>Warhead</span>
+            </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li ng-class="{ active: isActive(templates.chartsView)}">
+                  <a href="#" ng-click="template=templates.chartsView">Charts</a>
+                </li>
+                <li ng-class="{ active: isActive(templates.aboutView)}">
+                  <a href="#" ng-click="template=templates.aboutView">About</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-->
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container">
+        <div ng-include="template"></div>
       </div>
     </div>
   </div>
