@@ -3,7 +3,10 @@ directives.directive("barChart", function() {
     // Restrict to an element only
     restrict: "E",
     // Data will be given in an attribute called "chart-data"
-    scope: {data: "=chartData"},
+    scope: {
+      data: "=chartData",
+      type: "=dataType"
+    },
     link: function(scope, element, attrs) {
       /*
        * SVG code pieced together from:
@@ -17,11 +20,11 @@ directives.directive("barChart", function() {
 
       // Define chart information
       var chartInfo = {
-        postsBySub: {
+        posts: {
           label: "# of posts",
           format: "d"
         },
-        scoreBySub: {
+        score: {
           label: "score",
           format: "s"
         }
@@ -34,9 +37,9 @@ directives.directive("barChart", function() {
       var chart;
 
       // Set margins and size of chart
-      var margin = {top: 20, right: 20, bottom: 130, left: 70},
+      var margin = {top: 20, right: 20, bottom: 150, left: 70},
           width = 510 - margin.left - margin.right,
-          height = 300 - margin.top - margin.bottom;
+          height = 330 - margin.top - margin.bottom;
 
       // Define scales for axes
       var x = d3.scale.ordinal()
@@ -52,10 +55,10 @@ directives.directive("barChart", function() {
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient("left")
-          .tickFormat(d3.format(chartInfo[attrs.chartData].format));
+          .tickFormat(d3.format(chartInfo[attrs.type].format));
 
-      // Define y-axis label to use, dependent on chartData value
-      var yLabel = chartInfo[attrs.chartData].label;
+      // Define y-axis label to use
+      var yLabel = chartInfo[attrs.type].label;
 
       /*
        * Watch for chart data changes

@@ -12,9 +12,29 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
         url: "/api/pull"
 
       }).success(function(data) {
-        // Sends data to the data analyzer service for formatting
+        console.log(data.stats);
+
+        // Extract comments
         dataAnalyzer.extractComments($scope, data);
-        dataAnalyzer.extractSubreddit($scope, data);
+
+        // Extract subreddit data
+        subData = dataAnalyzer.chartData($scope, data, "subreddit");
+        $scope.postsBySub = subData.posts;
+        $scope.scoreBySub = subData.score;
+
+        // Extract domain data
+        domainData = dataAnalyzer.chartData($scope, data, "domain");
+        $scope.postsByDomain = domainData.posts;
+        $scope.scoreByDomain = domainData.score;
+
+        // Extract author data
+        authorData = dataAnalyzer.chartData($scope, data, "author");
+        $scope.postsByAuthor = authorData.posts;
+        $scope.scoreByAuthor = authorData.score;
+
+        console.log(subData);
+        console.log(domainData);
+        console.log(authorData);
 
       }).error(function(data) {
         // Number of comments set to 0

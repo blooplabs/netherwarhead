@@ -2,14 +2,17 @@
 // Requires app.js to be imported first
 
 services.factory("dataAnalyzer", function() {
-  // Extract total number of comments in all posts
+  /*
+   * Extract total number of comments in all posts
+   */
   var extractComments = function(scope, data) {
     var totalComments = data.stats.num_comments;
     console.log("Total comments: " + totalComments);
     scope.num_comments = totalComments;
   };
 
-  /* For use with the sort() method, sorts by descending
+  /*
+   * For use with the sort() method, sorts by descending
    * value and then alphabetically, disregarding capitalization
    */
   var sortDescending = function(a, b) {
@@ -30,43 +33,44 @@ services.factory("dataAnalyzer", function() {
     return compare;
   };
 
-  // Extract data by subreddit
-  var sortBySubreddit = function(scope, data) {
-    console.log(data.stats);
-
-    // Create sorable arrays of objects: {subreddit, value}
+  /*
+   * Extract compositional data from server data
+   * @param {String} type - Type of data to be extracted, can be one of
+   *                        ["subreddit", "domain", "author"]
+   */
+  var extractChartData = function(scope, data, type) {
+    // Create sortable arrays of objects: {type, value}
     var postsArray = [];
     var scoreArray = [];
-    for (var sub in data.stats.subreddit) {
-      // Posts by subreddit
+    for (var post in data.stats[type]) {
+      // Save post count
       postsArray.push({
-        name: sub,
-        value: data.stats.subreddit[sub].count
+        name: post,
+        value: data.stats[type][post].count
       });
-      // Score by subreddit
+      // Save post score
       scoreArray.push({
-        name: sub,
-        value: data.stats.subreddit[sub].score
+        name: post,
+        value: data.stats[type][post].score
       });
     }
 
+    // Sort data before returning
     postsArray.sort(sortDescending);
     scoreArray.sort(sortDescending);
 
-    scope.postsBySub = postsArray;
-    scope.scoreBySub = scoreArray;
-
-    console.log(scope.postsBySub);
-    console.log(scope.scoreBySub);
+    return {
+      posts: postsArray,
+      score: scoreArray
+    };
   };
 
   return {
-    // Extracts data from the given JSON object
     extractComments: function(scope, data) {
       return extractComments(scope, data);
     },
-    extractSubreddit: function(scope, data) {
-      return sortBySubreddit(scope, data);
+    chartData: function(scope, data, type) {
+      return extractChartData(scope, data, type);
     }
   };
 });
