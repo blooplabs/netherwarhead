@@ -1,3 +1,8 @@
+/*
+ * D3 Bar Chart Directive
+ * Use to show a bar chart of compositional data from reddit posts
+ * Requires app.js to be imported first
+ */
 directives.directive("barChart", function() {
   return {
     // Restrict to an element only

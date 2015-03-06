@@ -1,6 +1,7 @@
-// Controller for getting data from the server
-// Requires app.js to be imported first
-// Depends on dataAnalyzer.js
+/* Controller for getting data from the server
+ * Requires app.js to be imported first
+ * Depends on dataAnalyzer.js
+ */
 
 controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
   function dataController($scope, $http, dataAnalyzer) {

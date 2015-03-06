@@ -1,5 +1,6 @@
-// Controller for navigating between pages
-// Requires app.js to be imported first
+/* Controller for navigating between pages
+ * Requires app.js to be imported first
+ */
 
 controllers.controller("pageController", ["$scope",
   function pageController($scope) {

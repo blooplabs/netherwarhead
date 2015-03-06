@@ -1,5 +1,6 @@
-// Service for analyzing data from the server
-// Requires app.js to be imported first
+/* Service for analyzing data from the server
+ * Requires app.js to be imported first
+ */
 
 services.factory("dataAnalyzer", function() {
   /*
