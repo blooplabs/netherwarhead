@@ -1,8 +1,41 @@
+<!-- Compositional charts using data from reddit -->
 <div ng-controller="dataController">
   <h2>Data from the Top 25 Posts on /r/all</h2>
   <br>
   <h4>Number of Posts by Subreddit</h4>
-  <bar-chart chart-data="myData"></bar-chart>
+  <bar-chart chart-data="postsBySub" data-type="posts"></bar-chart>
+  <br>
+  <br>
+  <h4>Score by Subreddit</h4>
+  <bar-chart chart-data="scoreBySub" data-type="score"></bar-chart>
+  <br>
+  <br>
+  <h4>Number of Times Gilded by Subreddit</h4>
+  <bar-chart chart-data="gildedBySub" data-type="gilded"></bar-chart>
+  <br>
+  <br>
+  <h4>Number of Posts by Domain</h4>
+  <bar-chart chart-data="postsByDomain" data-type="posts"></bar-chart>
+  <br>
+  <br>
+  <h4>Score by Domain</h4>
+  <bar-chart chart-data="scoreByDomain" data-type="score"></bar-chart>
+  <br>
+  <br>
+  <h4>Number of Times Gilded by Domain</h4>
+  <bar-chart chart-data="gildedByDomain" data-type="gilded"></bar-chart>
+  <br>
+  <br>
+  <h4>Number of Posts by User</h4>
+  <bar-chart chart-data="postsByAuthor" data-type="posts"></bar-chart>
+  <br>
+  <br>
+  <h4>Score by User</h4>
+  <bar-chart chart-data="scoreByAuthor" data-type="score"></bar-chart>
+  <br>
+  <br>
+  <h4>Number of Times Gilded by User</h4>
+  <bar-chart chart-data="gildedByAuthor" data-type="gilded"></bar-chart>
   <br>
   <br>
   <div class="ng-cloak">Total Comments from the Top 25 Posts on /r/all: {{ num_comments }}</div>

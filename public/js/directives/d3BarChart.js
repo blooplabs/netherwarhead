@@ -1,9 +1,17 @@
+/*
+ * D3 Bar Chart Directive
+ * Use to show a bar chart of compositional data from reddit posts
+ * Requires app.js to be imported first
+ */
 directives.directive("barChart", function() {
   return {
     // Restrict to an element only
     restrict: "E",
     // Data will be given in an attribute called "chart-data"
-    scope: {data: "=chartData"},
+    scope: {
+      data: "=chartData",
+      type: "=dataType"
+    },
     link: function(scope, element, attrs) {
       /*
        * SVG code pieced together from:
@@ -15,13 +23,32 @@ directives.directive("barChart", function() {
       // Show loading indicator
       showLoading();
 
+      // Define chart information
+      var chartInfo = {
+        posts: {
+          label: "# of posts",
+          format: "d"
+        },
+        score: {
+          label: "score",
+          format: "s"
+        },
+        gilded: {
+          label: "# of times gilded",
+          format: "d"
+        }
+      };
+
       // Define data to plot
       var plotData = scope.data;
 
+      // Define chart var
+      var chart;
+
       // Set margins and size of chart
-      var margin = {top: 20, right: 20, bottom: 130, left: 60},
-          width = 500 - margin.left - margin.right,
-          height = 300 - margin.top - margin.bottom;
+      var margin = {top: 20, right: 20, bottom: 150, left: 70},
+          width = 510 - margin.left - margin.right,
+          height = 330 - margin.top - margin.bottom;
 
       // Define scales for axes
       var x = d3.scale.ordinal()
@@ -37,10 +64,10 @@ directives.directive("barChart", function() {
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient("left")
-          .tickFormat(d3.format("d"));
+          .tickFormat(d3.format(chartInfo[attrs.type].format));
 
-      // Define tag where chart is placed (this draws a white box)
-      var chart;
+      // Define y-axis label to use
+      var yLabel = chartInfo[attrs.type].label;
 
       /*
        * Watch for chart data changes
@@ -118,14 +145,14 @@ directives.directive("barChart", function() {
         // Draw and style y axis and number of ticks
         chart.append("g")
             .attr("class", "y axis")
-            .call(yAxis.tickValues(d3.range(y_max+1)))
+            .call(yAxis)
           .append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", -45)
+            .attr("y", -55)
             .attr("x", -44)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("# of posts");
+            .text(yLabel);
 
         // Draw and style bars
         chart.selectAll(".bar")
