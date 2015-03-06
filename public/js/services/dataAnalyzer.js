@@ -43,6 +43,7 @@ services.factory("dataAnalyzer", function() {
     // Create sortable arrays of objects: {type, value}
     var postsArray = [];
     var scoreArray = [];
+    var gildedArray = [];
     for (var post in data.stats[type]) {
       // Save post count
       postsArray.push({
@@ -54,15 +55,22 @@ services.factory("dataAnalyzer", function() {
         name: post,
         value: data.stats[type][post].score
       });
+      // Save gilded count
+      gildedArray.push({
+        name: post,
+        value: data.stats[type][post].gilded
+      });
     }
 
     // Sort data before returning
     postsArray.sort(sortDescending);
     scoreArray.sort(sortDescending);
+    gildedArray.sort(sortDescending);
 
     return {
       posts: postsArray,
-      score: scoreArray
+      score: scoreArray,
+      gilded: gildedArray
     };
   };
 

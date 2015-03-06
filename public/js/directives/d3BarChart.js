@@ -32,6 +32,10 @@ directives.directive("barChart", function() {
         score: {
           label: "score",
           format: "s"
+        },
+        gilded: {
+          label: "# of times gilded",
+          format: "d"
         }
       };
 

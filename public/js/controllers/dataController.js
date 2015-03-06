@@ -22,16 +22,19 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
         subData = dataAnalyzer.chartData($scope, data, "subreddit");
         $scope.postsBySub = subData.posts;
         $scope.scoreBySub = subData.score;
+        $scope.gildedBySub = subData.gilded;
 
         // Extract domain data
         domainData = dataAnalyzer.chartData($scope, data, "domain");
         $scope.postsByDomain = domainData.posts;
         $scope.scoreByDomain = domainData.score;
+        $scope.gildedByDomain = domainData.gilded;
 
         // Extract author data
         authorData = dataAnalyzer.chartData($scope, data, "author");
         $scope.postsByAuthor = authorData.posts;
         $scope.scoreByAuthor = authorData.score;
+        $scope.gildedByAuthor = authorData.gilded;
 
         console.log(subData);
         console.log(domainData);
