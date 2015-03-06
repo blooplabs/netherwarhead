@@ -8,7 +8,6 @@ services.factory("dataAnalyzer", function() {
    */
   var extractComments = function(scope, data) {
     var totalComments = data.stats.num_comments;
-    console.log("Total comments: " + totalComments);
     scope.num_comments = totalComments;
   };
 

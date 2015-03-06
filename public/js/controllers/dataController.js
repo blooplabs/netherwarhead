@@ -13,8 +13,6 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
         url: "/api/pull"
 
       }).success(function(data) {
-        console.log(data.stats);
-
         // Extract comments
         dataAnalyzer.extractComments($scope, data);
 
@@ -36,11 +34,8 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
         $scope.scoreByAuthor = authorData.score;
         $scope.gildedByAuthor = authorData.gilded;
 
-        console.log(subData);
-        console.log(domainData);
-        console.log(authorData);
-
       }).error(function(data) {
+        // TODO: Log the error.
         // Number of comments set to 0
         $scope.num_comments = null;
         console.log(data);
