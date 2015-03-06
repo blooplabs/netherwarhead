@@ -69,6 +69,16 @@ directives.directive("barChart", function() {
       // Define y-axis label to use
       var yLabel = chartInfo[attrs.type].label;
 
+      // Define tooltips
+      var tip = d3.tip()
+          .attr('class', 'd3-tip')
+          .offset([-10, 0])
+          .html(function(d) {
+            return "<strong>" + yLabel + ":</strong> " +
+                   "<span class='hover-tip'>" + d.value + "</span>";
+          });
+
+
       /*
        * Watch for chart data changes
        */
@@ -87,6 +97,8 @@ directives.directive("barChart", function() {
                 .attr("class", "chart")
               .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            chart.call(tip);
           }
 
           // Use new data for plotting
@@ -162,7 +174,9 @@ directives.directive("barChart", function() {
             .attr("x", function(d) { return x(d.name); })
             .attr("y", function(d) { return y(d.value); })
             .attr("height", function(d) { return height - y(d.value); })
-            .attr("width", x.rangeBand());
+            .attr("width", x.rangeBand())
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
       }
     }
   };
