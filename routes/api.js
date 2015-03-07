@@ -4,7 +4,7 @@
 var express = require('express');
 var reddit = require('../lib/api/reddit');
 var redditAnalyzer = require('../lib/analytics/reddit-analyzer');
-var db = require('../lib/db');
+var db = require('../lib/models/db');
 var router = express.Router();
 
 function pullRequestHandler(req, res, callback) {
