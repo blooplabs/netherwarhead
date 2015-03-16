@@ -8,6 +8,19 @@
   border-radius: .2em;
 }
 
+.chart-box {
+  margin-top: 20px;
+  width: 570px;
+}
+
+h2.title {
+  margin-bottom: 40px;
+}
+
+.subreddit-name {
+  margin-left: 20px;
+  display: inline-block;
+}
 
 /* D3 Chart Styles */
 

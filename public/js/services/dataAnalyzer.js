@@ -1,16 +1,9 @@
-/* Service for analyzing data from the server
+/*
+ * Service for analyzing data from the server
  * Requires app.js to be imported first
  */
 
 services.factory("dataAnalyzer", function() {
-  /*
-   * Extract total number of comments in all posts
-   */
-  var extractComments = function(scope, data) {
-    var totalComments = data.stats.num_comments;
-    scope.num_comments = totalComments;
-  };
-
   /*
    * For use with the sort() method, sorts by descending
    * value and then alphabetically, disregarding capitalization
@@ -74,9 +67,6 @@ services.factory("dataAnalyzer", function() {
   };
 
   return {
-    extractComments: function(scope, data) {
-      return extractComments(scope, data);
-    },
     chartData: function(scope, data, type) {
       return extractChartData(scope, data, type);
     }

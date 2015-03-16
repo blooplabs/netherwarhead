@@ -17,7 +17,8 @@ directives.directive("barChart", function() {
        * SVG code pieced together from:
        * http://bost.ocks.org/mike/bar/3/
        * http://odiseo.net/angularjs/proper-use-of-d3-js-with-angular-directives
-       * http://www.sitepoint.com/creating-charting-directives-using-angularjs-d3-js/
+       * http://www.sitepoint.com/creating-charting-directives-using-angularjs-
+          d3-js/
        */
 
       // Show loading indicator
@@ -46,9 +47,9 @@ directives.directive("barChart", function() {
       var chart;
 
       // Set margins and size of chart
-      var margin = {top: 20, right: 20, bottom: 150, left: 70},
+      var margin = {top: 20, right: 20, bottom: 170, left: 70},
           width = 510 - margin.left - margin.right,
-          height = 330 - margin.top - margin.bottom;
+          height = 350 - margin.top - margin.bottom;
 
       // Define scales for axes
       var x = d3.scale.ordinal()
@@ -83,10 +84,15 @@ directives.directive("barChart", function() {
        * Watch for chart data changes
        */
       scope.$watchCollection("data", function(newVal, oldVal, scope) {
-        // If there is new data, draw chart
-        if (newVal !== oldVal) {
-          // If first load
-          if (oldVal === undefined) {
+        // If new data is loading, show loading indicators
+        if (newVal === null && oldVal !== null) {
+          // Remove existing charts
+          element.children().remove();
+          showLoading();
+
+        } else {
+          // If there is new data, draw chart
+          if (newVal !== oldVal) {
             // Hide loading indicator
             hideLoading();
 
@@ -96,16 +102,17 @@ directives.directive("barChart", function() {
                 .attr("height", height + margin.top + margin.bottom)
                 .attr("class", "chart")
               .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," +
+                  margin.top + ")");
 
             chart.call(tip);
+
+            // Use new data for plotting
+            plotData = newVal;
+
+            // Draw chart
+            redrawChart();
           }
-
-          // Use new data for plotting
-          plotData = newVal;
-
-          // Draw chart
-          redrawChart();
         }
       });
 
@@ -113,7 +120,8 @@ directives.directive("barChart", function() {
        * Shows chart loading spinner
        */
       function showLoading() {
-        element.append("<i class=\"fa fa-2x fa-spinner fa-spin chart-load-icon\"></i>");
+        element.append("<i class=\"fa fa-2x fa-spinner fa-spin " +
+          "chart-load-icon\"></i>");
       }
 
       /*
@@ -127,10 +135,12 @@ directives.directive("barChart", function() {
        * Clears any existing chart elements from the SVG, then draws chart
        */
       function redrawChart() {
-        // Delete existing axes and bars
-        chart.selectAll("text").remove();
-        chart.selectAll("g").remove();
-        chart.selectAll("rect").remove();
+        if (chart !== undefined) {
+          // Delete existing axes and bars
+          chart.selectAll("text").remove();
+          chart.selectAll("g").remove();
+          chart.selectAll("rect").remove();
+        }
 
         // Draw chart
         drawChart();
