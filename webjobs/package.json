@@ -1,9 +1,0 @@
-{
-  "name": "netherwarhead-webjobs",
-  "version": "0.0.1",
-  "private": true,
-  "main": "run.js",
-  "dependencies": {
-    "request": "^2.53.0"
-  }
-}
