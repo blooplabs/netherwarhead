@@ -13,6 +13,7 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
     $scope.dataPull = function(chosenSub) {
       var fullUrl = "/api/pull";
 
+      // Determine which subreddit to query
       if (typeof chosenSub !== "undefined") {
         // If valid subreddit was passed in, use it in the API URI
         fullUrl = fullUrl + "/" + chosenSub;
@@ -61,7 +62,7 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
     // Pull data from server, initially from /r/all
     $scope.dataPull();
 
-    // Clears all data sets, which will make the charts show "loading"
+    // Clears all data sets, which will make the charts appear to load
     function clearData() {
         $scope.postsBySub = null;
         $scope.scoreBySub = null;

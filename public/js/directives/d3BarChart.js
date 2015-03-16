@@ -90,6 +90,7 @@ directives.directive("barChart", function() {
           element.children().remove();
           showLoading();
 
+        // Else data has loaded
         } else {
           // If there is new data, draw chart
           if (newVal !== oldVal) {
@@ -111,7 +112,7 @@ directives.directive("barChart", function() {
             plotData = newVal;
 
             // Draw chart
-            redrawChart();
+            drawChart();
           }
         }
       });
@@ -129,21 +130,6 @@ directives.directive("barChart", function() {
        */
       function hideLoading() {
           $("i.chart-load-icon").remove();
-      }
-
-      /*
-       * Clears any existing chart elements from the SVG, then draws chart
-       */
-      function redrawChart() {
-        if (chart !== undefined) {
-          // Delete existing axes and bars
-          chart.selectAll("text").remove();
-          chart.selectAll("g").remove();
-          chart.selectAll("rect").remove();
-        }
-
-        // Draw chart
-        drawChart();
       }
 
       /*

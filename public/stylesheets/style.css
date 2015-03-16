@@ -13,13 +13,13 @@
   width: 570px;
 }
 
-h2.title {
-  margin-bottom: 40px;
-}
-
 .subreddit-name {
   margin-left: 20px;
   display: inline-block;
+}
+
+h2.title {
+  margin-bottom: 40px;
 }
 
 /* D3 Chart Styles */
