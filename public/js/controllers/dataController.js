@@ -1,11 +1,11 @@
 /*
  * Controller for getting data from the server
  * Requires app.js to be imported first
- * Depends on dataAnalyzer.js
+ * Depends on dataExtractor.js
  */
 
-controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
-  function dataController($scope, $http, dataAnalyzer) {
+controllers.controller("dataController", ["$scope", "$http", "dataExtractor",
+  function dataController($scope, $http, dataExtractor) {
 
     $scope.currentSub = "/r/all";
 
@@ -37,19 +37,19 @@ controllers.controller("dataController", ["$scope", "$http", "dataAnalyzer",
 
       }).success(function(data, status, headers, config) {
         // Extract subreddit data
-        subData = dataAnalyzer.chartData($scope, data, "subreddit");
+        subData = dataExtractor.extractChartData($scope, data, "subreddit");
         $scope.postsBySub = subData.posts;
         $scope.scoreBySub = subData.score;
         $scope.gildedBySub = subData.gilded;
 
         // Extract domain data
-        domainData = dataAnalyzer.chartData($scope, data, "domain");
+        domainData = dataExtractor.extractChartData($scope, data, "domain");
         $scope.postsByDomain = domainData.posts;
         $scope.scoreByDomain = domainData.score;
         $scope.gildedByDomain = domainData.gilded;
 
         // Extract author data
-        authorData = dataAnalyzer.chartData($scope, data, "author");
+        authorData = dataExtractor.extractChartData($scope, data, "author");
         $scope.postsByAuthor = authorData.posts;
         $scope.scoreByAuthor = authorData.score;
         $scope.gildedByAuthor = authorData.gilded;

@@ -1,9 +1,9 @@
 /*
- * Service for analyzing data from the server
+ * Service for extracting data from the server
  * Requires app.js to be imported first
  */
 
-services.factory("dataAnalyzer", function() {
+services.factory("dataExtractor", function() {
   /*
    * For use with the sort() method, sorts by descending
    * value and then alphabetically, disregarding capitalization
@@ -67,7 +67,7 @@ services.factory("dataAnalyzer", function() {
   };
 
   return {
-    chartData: function(scope, data, type) {
+    extractChartData: function(scope, data, type) {
       return extractChartData(scope, data, type);
     }
   };
