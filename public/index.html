@@ -54,11 +54,11 @@
           <div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li ng-class="{ active: isActive(templates.chartsView)}">
-                  <a href="#" ng-click="template=templates.chartsView">Charts</a>
+                <li ng-class="{ active: isActive('/') }">
+                  <a href="#/">Charts</a>
                 </li>
-                <li ng-class="{ active: isActive(templates.aboutView)}">
-                  <a href="#" ng-click="template=templates.aboutView">About</a>
+                <li ng-class="{ active: isActive('/about') }">
+                  <a href="#/about">About</a>
                 </li>
               </ul>
             </div>
@@ -70,7 +70,7 @@
 
       <!-- Page Content -->
       <div class="container">
-        <div ng-include="template"></div>
+        <div ng-view></div>
       </div>
     </div>
   </div>
@@ -78,7 +78,8 @@
   <!-- jQuery -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <!-- AngularJS -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+  <script src="/components/angular/angular.min.js"></script>
+  <script src="/components/angular-route/angular-route.min.js"></script>
   <!-- Bootstrap -->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <!-- D3 -->
