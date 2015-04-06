@@ -5,17 +5,17 @@
     <div class="col-md-6">
       <!-- Dropdown -->
       <div class="btn-group">
-        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <a href="#/" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           Choose subreddit <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#" ng-click="dataPull()">
+          <li><a href="#/" ng-click="dataPull()">
             /r/all
           </a></li>
-          <li><a href="#" ng-click="dataPull('dataisbeautiful')">
+          <li><a href="#/" ng-click="dataPull('dataisbeautiful')">
             /r/dataisbeautiful
           </a></li>
-          <li><a href="#" ng-click="dataPull('programming')">
+          <li><a href="#/" ng-click="dataPull('programming')">
             /r/programming
           </a></li>
         </ul>
@@ -29,7 +29,6 @@
   <div class="row">
     <!-- Report sub-page -->
     <div ng-include="chartTemplate"></div>
-
 
     <!--<div class="col-md-6 ng-cloak">
       Total Comments from the Top 25 Posts on /r/all: {{ num_comments }}
