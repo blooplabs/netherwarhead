@@ -3,7 +3,7 @@
 **Install**
 
 ```
-git clone git@github.com/netherwarhead/netherwarhead
+git clone git@github.com/blooplabs/netherwarhead
 cd netherwarhead
 npm install
 bower install
